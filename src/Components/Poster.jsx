@@ -23,8 +23,8 @@ function Poster (){
     return(
         <section className="px-8 py-6 space-y-4 pt-20">
         <div className="w-full h-14 rounded-xl bg-secondary text-xs lg:text-xl flex  justify-center items-center p-4">As per RBI guidelines, activate your card within 1 st 30 days to avoid card closure.</div>
-            <div className="flex flex-row rounded-xl" >
-                <div className="w-2/5 relative">
+            <div className="flex flex-col md:flex-row rounded-xl" >
+                <div className="w-full md:w-2/5 relative">
                     <img src={background} className="w-full h-auto" alt="Background" />
                     <div className="absolute top-0 left-1/4 transform -translate-x-1/4 text-center w-[70%]">
                         <img src={image} className="w-full h-auto mx-auto" alt="Overlay" />
@@ -36,8 +36,8 @@ function Poster (){
                     </div>
                 </div>
             
-                <div className="w-3/5">
-                    <div className="w-full py-14 px-8  text-center">
+                <div className="w-full md:w-3/5">
+                    <div className="w-full py-5 px-8  text-center">
                         <div className="text-xl p-4">Unlock Offers worth Rs. 3,600</div>
                         <Stepper activeStep={activeStep}
                         lineClassName="#d9d9d"
@@ -71,7 +71,7 @@ function Poster (){
                                     name="terms"
                                     value="no"
                                     onChange={handleRadioChange}
-                                    className="form-radio text-red-600"
+                                    className="form-radio custom-radio"
                                 />
                                 </label>
                                 <label className="flex items-center">
@@ -81,7 +81,7 @@ function Poster (){
                                     name="terms"
                                     value="yes"
                                     onChange={handleRadioChange}
-                                    className="form-radio text-blue-600"
+                                    className="form-radio custom-radio"
                                 />
                                 </label>
                             </div>
@@ -99,7 +99,7 @@ function Poster (){
                                     name="secondStep"
                                     value="no"
                                     onChange={handleRadioChange}
-                                    className="form-radio text-red-600"
+                                    className="form-radio custom-radio"
                                 />
                                 </label>
                                 <label className="flex items-center">
@@ -109,7 +109,7 @@ function Poster (){
                                     name="secondStep"
                                     value="yes"
                                     onChange={handleRadioChange}
-                                    className="form-radio text-blue-600"
+                                    className="form-radio custom-radio"
                                 />
                                 </label>
                             </div>

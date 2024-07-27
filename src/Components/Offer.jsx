@@ -76,7 +76,7 @@ function Offer (){
         <Typography variant="h4" color="black" className=" mb-6">
             Unlock Activation Benefits
         </Typography>
-        <div className="grid grid-cols-5 gap-4 overflow-y-auto h-[40rem] w-auto">
+        <div className="grid sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-5 gap-4 overflow-y-auto h-[40rem] w-auto">
             {Object.keys(offers).map(key => (
                 <OfferCard key={key} offer={offers[key]} />
             ))}

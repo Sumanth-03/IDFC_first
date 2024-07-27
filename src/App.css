@@ -36,3 +36,26 @@
     transform: rotate(360deg);
   }
 }
+.custom-radio {
+  appearance: none;
+  background-color: #ffffff;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  border: 2px solid #ccc;
+  position: relative;
+  cursor: pointer;
+}
+.custom-radio:checked {
+  border-color: #9C1D26; 
+}
+.custom-radio:checked::before {
+  content: '';
+  position: absolute;
+  top: 25%;
+  left: 25%;
+  width: 50%;
+  height: 50%;
+  background-color: #9C1D26;
+  border-radius: 50%;
+}

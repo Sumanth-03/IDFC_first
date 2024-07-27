@@ -12,7 +12,7 @@ function Footer (){
             <NavLink>Privacy Policy</NavLink>
             <NavLink>FAQ</NavLink>
             </nav>
-            <p className="mx-40 mt-10 p-4">
+            <p className="mx-2 md:mx-40 mt-2 md:mt-10 p-4">
                 <h3>Disclaimer</h3>
                 MRewards is a platform hosted Cheggout Services exclusively for MResult Services Private Limited only for display 
                 of offers extended by Networks and Merchants. MRewards is not selling/ rendering any of these Products/ Services 
