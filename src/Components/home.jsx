@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 
 import Nav from './nav';
 import Poster from './Poster';
@@ -6,7 +6,7 @@ import Offer from './Offer';
 import Footer from './Footer'
 import { Spinner } from "@material-tailwind/react";
 import "./style.css"
-import { makeApiCall, makeApiCallWithAuth, makeApiGetCallWithAuth } from '../Services/Api' 
+import { makeApiCallGet, makeApiCall, makeApiCallWithAuth, makeApiGetCallWithAuth } from '../Services/Api' 
 import { useNavigate } from "react-router-dom";
 
 function Home (){
@@ -27,9 +27,55 @@ function Home (){
     const virtualId = queryParams.get('virtualid');
     const bankName = queryParams.get('bankName');
 
-    if (token) {
-        sessionStorage.setItem('token', token)
-      }
+    //   if (token) {
+    //     sessionStorage.setItem('token', token)
+    //   }
+
+      if(hdnRefNumber && !modal && !isloading){
+        setIsloading(true);
+        let data ={
+          order_id: hdnRefNumber,
+          razorpay_payment_id: transactionId,
+          razorpay_amount: amount,
+          offer_id: "179",
+        }
+        makeApiCallWithAuth('checkPaymentStatus', data)
+        .then((response) => {
+          console.log("getpayres",response.data)
+          if(response?.data?.status === 200){
+            sessionStorage.setItem('coupon',JSON.stringify(response.data.data))
+            navigate('/redeem')
+          //navigate('/redeem')
+          //setModal('success')
+          }
+          else{
+            if(!modal){
+            setModal('failed')
+            setErrmessage(response.data?.message)
+            setIsloading(false);
+            }
+          }
+    
+        })
+        .catch((e) => {console.log("err", e); setIsloading(false);})
+    
+        
+       }
+
+    useEffect(() => {
+        if(!hdnRefNumber){
+        makeApiCallGet()
+        .then((response) => {
+          console.log("tok",response.data)
+          if (response.data?.result) {
+            sessionStorage.setItem('token', response.data?.result)
+          }
+
+        })
+        .catch((e) => {console.log("err", e); })
+       }
+
+    },[]);
 
     const handlePay = () => {
        console.log("yre")

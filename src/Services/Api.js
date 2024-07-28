@@ -15,10 +15,10 @@ const makeApiCall = async (url, data) => {
     return axios(bodyData)
 }
 
-const makeApiCallGet = async (url) => {
+const makeApiCallGet = async () => {
 
     let bodyData = {
-        url: apiBaseUrl + "/" + url,
+        url: 'https://restapi-stage.cheggout.com/api/v1.1/GetToKenForPWA?ChegCustomerId=1707395706858617&bankName=BOB',
         method: "GET",
         headers: {
             'accept': 'application/json',
