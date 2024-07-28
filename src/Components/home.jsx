@@ -80,8 +80,13 @@ function Home (){
 
     const handlePay = () => {
        console.log("yre")
-       setEnabled(true)
-       setBtntext(true)
+       setIsloading(true);
+       setTimeout(() => {
+        setIsloading(false);
+        setEnabled(true)
+        setBtntext(true)
+      }, 2000);
+       
     //    setIsloading(true);
     // makeApiCallWithAuth('validationCheck',{mop: 1, offer_id: "179"})
     // .then((response) => {
@@ -126,6 +131,7 @@ function Home (){
           <div className="spinner-container">
           <Spinner  size="lg" classNames={{circle1: "border-b-[#27374D]"  }}/>
           </div>
+          
          </div>}
             <Nav></Nav>
             <Poster handlePay={handlePay} btntext={btntext}></Poster>
