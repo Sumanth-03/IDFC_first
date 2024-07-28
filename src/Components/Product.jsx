@@ -27,7 +27,7 @@ function Product (){
                 <span className="mr-auto text-xl p-2">COUPON3THIS</span>
                 <img src={copy} className="ml-auto p-2"></img>
             </div>
-            <h1 className="text-lg font-bold text-white m-10">Vali till: 24 Mar 2024</h1>
+            <h1 className="text-lg font-bold text-white m-10">Valid till: 24 Nov 2024</h1>
             <button className="p-5 bg-white text-turtiary font-bold rounded-xl px-10 mx-10">REDEEM NOW</button>
             </div>
             <div className="w-1/2 relative">
@@ -42,7 +42,7 @@ function Product (){
                 <h1 className="text-2xl font-bold">Order Details</h1>
                 <span className="pt-2">Availed for 1 pts</span>
                 <span>Order ID : 22336070437</span>
-                <span>1 Nov, 12:05 PM</span>
+                <span>1 Aug, 12:05 PM</span>
             </div>
             <div className="w-full md:w-1/2 m-10 p-5 shadow-lg">
             <h1 className="text-2xl font-bold">Quick Links</h1>

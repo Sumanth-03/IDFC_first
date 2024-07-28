@@ -42,7 +42,7 @@ const images = {
 
 
 
-function Offer (){
+function Offer ({enabled}){
     const navigate = useNavigate();
     function handleClick (data) {
         navigate('/product', {state:data})
@@ -60,11 +60,19 @@ function Offer (){
                 </Typography>
             </CardBody>
             <CardFooter className="pt-0">
+                {enabled ?
                 <Button onClick={()=>handleClick(offer)} color="blue" size="sm" className="flex flex-row bg-primary space-x-2 m-auto">
-                    <img src={Lock} className="w-5"></img>
-                    <sapn>Unlock Offer</sapn>
+                    {/* <img src={Lock} className="w-5"></img> */}
+                    <span>Redeem Now</span>
                     
                 </Button>
+                :
+                <Button disabled color="blue" size="sm" className="flex flex-row bg-primary space-x-2 m-auto">
+                    <img src={Lock} className="w-5"></img>
+                    <span className="pt-1">Unlock Offer</span>
+                    
+                </Button>
+                }
             </CardFooter>
         </Card>
     );

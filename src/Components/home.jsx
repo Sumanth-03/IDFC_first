@@ -14,6 +14,8 @@ function Home (){
     const [isloading, setIsloading] = useState(false);
     const [modal, setModal] = useState('')
     const [errmessage, setErrmessage] = useState('')
+    const [enabled, setEnabled] = useState(false);
+    const [btntext, setBtntext] = useState(false);
 
     const navigate = useNavigate()
 
@@ -44,9 +46,8 @@ function Home (){
           console.log("getpayres",response.data)
           if(response?.data?.status === 200){
             sessionStorage.setItem('coupon',JSON.stringify(response.data.data))
-            navigate('/redeem')
-          //navigate('/redeem')
-          //setModal('success')
+            //navigate('/redeem')
+          
           }
           else{
             if(!modal){
@@ -79,40 +80,42 @@ function Home (){
 
     const handlePay = () => {
        console.log("yre")
-       setIsloading(true);
-    makeApiCallWithAuth('validationCheck',{mop: 1, offer_id: "179"})
-    .then((response) => {
-      console.log(response?.data?.data?.url)
-      if(response?.data?.data?.url){
-        let paymenturl = response.data.data.url;
-        setIsloading(false);
-        window.location.href = paymenturl;
-        }
-      else if(response?.data?.data?.errorstring === "Failed"){
-        setIsloading(false);
-        if(!modal){
-          setModal('failed')
-          setErrmessage('Something Went Wrong')
-          //setIsloading(false);
-          }
+       setEnabled(true)
+       setBtntext(true)
+    //    setIsloading(true);
+    // makeApiCallWithAuth('validationCheck',{mop: 1, offer_id: "179"})
+    // .then((response) => {
+    //   console.log(response?.data?.data?.url)
+    //   if(response?.data?.data?.url){
+    //     let paymenturl = response.data.data.url;
+    //     setIsloading(false);
+    //     window.location.href = paymenturl;
+    //     }
+    //   else if(response?.data?.data?.errorstring === "Failed"){
+    //     setIsloading(false);
+    //     if(!modal){
+    //       setModal('failed')
+    //       setErrmessage('Something Went Wrong')
+    //       //setIsloading(false);
+    //       }
       
-      }
-      else if(response?.data?.status === 200){
-        sessionStorage.setItem('coupon',JSON.stringify(response.data.data))
-        setIsloading(false);
-        navigate('/redeem')
-      }
-      else{
-        setIsloading(false);
-        if(!modal){
-          setModal('failed')
-          setErrmessage(response.data?.message)
-          //setIsloading(false);
-          }
-      }
+    //   }
+    //   else if(response?.data?.status === 200){
+    //     sessionStorage.setItem('coupon',JSON.stringify(response.data.data))
+    //     setIsloading(false);
+    //     navigate('/redeem')
+    //   }
+    //   else{
+    //     setIsloading(false);
+    //     if(!modal){
+    //       setModal('failed')
+    //       setErrmessage(response.data?.message)
+    //       //setIsloading(false);
+    //       }
+    //   }
        
-    })
-    .catch((e) => {console.log("err", e);setIsloading(false);})
+    // })
+    // .catch((e) => {console.log("err", e);setIsloading(false);})
    
     };
 
@@ -125,8 +128,8 @@ function Home (){
           </div>
          </div>}
             <Nav></Nav>
-            <Poster handlePay={handlePay}></Poster>
-            <Offer></Offer>
+            <Poster handlePay={handlePay} btntext={btntext}></Poster>
+            <Offer enabled={enabled}></Offer>
             <Footer></Footer>
         </div>
     )
