@@ -2,32 +2,36 @@ import React from "react"
 import background from '../Assets/Poster_bg.svg'
 import image from '../Assets/Poster_img.svg'
 import msg from '../Assets/MessegeSymbol.svg'
-import { Stepper, Step, Popover,PopoverHandler,PopoverContent, Button, } from "@material-tailwind/react";
+import { Stepper, Step, Popover,PopoverHandler,PopoverContent, Button } from "@material-tailwind/react";
 import { useState } from "react";
 import { XMarkIcon } from '@heroicons/react/24/solid';
 
 function Poster (){
     const [activeStep, setActiveStep] = useState(0);
     const [isYesSelected, setIsYesSelected] = useState(false);
+    const [showPop, setShowPop] = useState(false)
   
     const handleRadioChange = (e) => {
       const { value } = e.target;
       if (value === 'yes') {
         setIsYesSelected(true);
         setActiveStep(activeStep + 1);
+        setShowPop(false)
       } else {
         setIsYesSelected(false);
+        setShowPop(true)
+
       }
     };
   
     return(
         <section className="px-8 py-6 space-y-4 pt-20">
         <div className="w-full h-14 rounded-xl bg-secondary text-xs lg:text-xl flex  justify-center items-center p-4">As per RBI guidelines, activate your card within 1 st 30 days to avoid card closure.</div>
-            <div className="flex flex-col md:flex-row rounded-xl" >
+            <div className="flex flex-col md:flex-row rounded-xl h-80 -ml-20" >
                 <div className="w-full md:w-2/5 relative">
-                    <img src={background} className="w-full h-auto" alt="Background" />
+                    <img src={background} className="w-full h-80" alt="Background" />
                     <div className="absolute top-0 left-1/4 transform -translate-x-1/4 text-center w-[70%]">
-                        <img src={image} className="w-full h-auto mx-auto" alt="Overlay" />
+                        <img src={image} className="w-full h-44 mx-auto" alt="Overlay" />
                         <h2 className="font-bold text-xs sm:text-sm md:text-base lg:text-2xl text-white">
                         Activate your card to <br />
                         claim benefits worth <br />
@@ -134,16 +138,51 @@ function Poster (){
                     }}
                     >
                     <div className="relative z-20">
+                    {(activeStep === 0 && showPop) &&
+                    <PopoverHandler>
+                        <Button variant="text" className="flex flex-row "><img src={msg} className="w-5"></img><span className="px-2">How to set PIN?</span></Button>
+                    </PopoverHandler>
+                    }
+                    {(activeStep === 1 && showPop) &&
                     <PopoverHandler>
                         <Button variant="text" className="flex flex-row "><img src={msg} className="w-5"></img><span className="px-2">How to transcript limit?</span></Button>
                     </PopoverHandler>
+                    }
                     <PopoverContent className="relative p-4">
                         <button
                         className="absolute top-2 right-2 p-1 text-gray-600 hover:text-gray-900"
                         onClick={() => console.log('Close popover')}
                         >
-                        <XMarkIcon className="h-5 w-5" />
+                        {/* <XMarkIcon className="h-5 w-5" /> */}
                         </button>
+                        {activeStep === 0 &&
+                        <>
+                        <div className="mb-4">
+                        How to set PIN?
+                        </div>
+                        <div className="space-y-2">
+                            <ol class="list-decimal px-3">
+                            <li>Generate PIN from nearest ATM</li>
+                            <li>Login to internet banking and generate PIN</li>
+                            <li>Send SMS and generate</li>
+                            </ol>
+                        {/* <Button variant="text" className="w-full border-none">
+                            Option 1
+                        </Button>
+                        <Button variant="text" className="w-full border-none">
+                            Option 2
+                        </Button>
+                        <Button variant="text" className="w-full border-none">
+                            Option 3
+                        </Button>
+                        <Button variant="text" className="w-full border-none">
+                            Option 4
+                        </Button> */}
+                        </div>
+                        </>
+                         }
+                        {activeStep === 1 &&
+                        <>
                         <div className="mb-4">
                         How to transcript limit?
                         </div>
@@ -161,6 +200,8 @@ function Poster (){
                             Option 4
                         </Button>
                         </div>
+                        </>
+                         }
                     </PopoverContent>
                     </div>    
                     
