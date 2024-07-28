@@ -6,7 +6,7 @@ import { Stepper, Step, Popover,PopoverHandler,PopoverContent, Button } from "@m
 import { useState } from "react";
 import { XMarkIcon } from '@heroicons/react/24/solid';
 
-function Poster (){
+const Poster = ({handlePay}) => {
     const [activeStep, setActiveStep] = useState(0);
     const [isYesSelected, setIsYesSelected] = useState(false);
     const [showPop, setShowPop] = useState(false)
@@ -125,7 +125,7 @@ function Poster (){
                             <h2 className="font-bold text-xl mb-4 md:mb-0 text-left">
                               One last step to claim activation <br /> benefits: Do a transaction worth 1 RS
                             </h2>
-                            <button className="px-10 py-2 bg-primary text-white rounded-xl">
+                            <button className="px-10 py-2 bg-primary text-white rounded-xl" onClick={handlePay}>
                               Pay 1 Rs
                             </button>
                           </div>
