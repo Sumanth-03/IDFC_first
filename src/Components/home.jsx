@@ -44,7 +44,7 @@ function Home (){
         makeApiCallWithAuth('checkPaymentStatus', data)
         .then((response) => {
           console.log("getpayres",response.data)
-          if(response?.data?.status === 200){
+          if(response?.data?.status === 200 || response?.data?.status === 201){
             //sessionStorage.setItem('coupon',JSON.stringify(response.data.data))
             //navigate('/redeem')
             setModal('success');
