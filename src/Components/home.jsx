@@ -45,8 +45,12 @@ function Home (){
         .then((response) => {
           console.log("getpayres",response.data)
           if(response?.data?.status === 200){
-            sessionStorage.setItem('coupon',JSON.stringify(response.data.data))
+            //sessionStorage.setItem('coupon',JSON.stringify(response.data.data))
             //navigate('/redeem')
+            setModal('success');
+            setIsloading(false);
+            setEnabled(true)
+            setBtntext(true)
           
           }
           else{
@@ -58,7 +62,7 @@ function Home (){
           }
     
         })
-        .catch((e) => {console.log("err", e); setIsloading(false);})
+        .catch((e) => {console.log("err", e); setModal('failed');setIsloading(false);})
     
         
        }
@@ -80,47 +84,47 @@ function Home (){
 
     const handlePay = () => {
        console.log("yre")
+      //  setIsloading(true);
+      //  setTimeout(() => {
+      //   setIsloading(false);
+      //   setEnabled(true)
+      //   setBtntext(true)
+      // }, 2000);
+       
        setIsloading(true);
-       setTimeout(() => {
+    makeApiCallWithAuth('validationCheck',{mop: 3, offer_id: "179"})
+    .then((response) => {
+      console.log(response?.data?.data?.url)
+      if(response?.data?.data?.url){
+        let paymenturl = response.data.data.url;
         setIsloading(false);
-        setEnabled(true)
-        setBtntext(true)
-      }, 2000);
-       
-    //    setIsloading(true);
-    // makeApiCallWithAuth('validationCheck',{mop: 1, offer_id: "179"})
-    // .then((response) => {
-    //   console.log(response?.data?.data?.url)
-    //   if(response?.data?.data?.url){
-    //     let paymenturl = response.data.data.url;
-    //     setIsloading(false);
-    //     window.location.href = paymenturl;
-    //     }
-    //   else if(response?.data?.data?.errorstring === "Failed"){
-    //     setIsloading(false);
-    //     if(!modal){
-    //       setModal('failed')
-    //       setErrmessage('Something Went Wrong')
-    //       //setIsloading(false);
-    //       }
+        window.location.href = paymenturl;
+        }
+      else if(response?.data?.data?.errorstring === "Failed"){
+        setIsloading(false);
+        if(!modal){
+          setModal('failed')
+          setErrmessage('Something Went Wrong')
+          //setIsloading(false);
+          }
       
-    //   }
-    //   else if(response?.data?.status === 200){
-    //     sessionStorage.setItem('coupon',JSON.stringify(response.data.data))
-    //     setIsloading(false);
-    //     navigate('/redeem')
-    //   }
-    //   else{
-    //     setIsloading(false);
-    //     if(!modal){
-    //       setModal('failed')
-    //       setErrmessage(response.data?.message)
-    //       //setIsloading(false);
-    //       }
-    //   }
+      }
+      else if(response?.data?.status === 200){
+        sessionStorage.setItem('coupon',JSON.stringify(response.data.data))
+        setIsloading(false);
+        navigate('/redeem')
+      }
+      else{
+        setIsloading(false);
+        if(!modal){
+          setModal('failed')
+          setErrmessage(response.data?.message)
+          //setIsloading(false);
+          }
+      }
        
-    // })
-    // .catch((e) => {console.log("err", e);setIsloading(false);})
+    })
+    .catch((e) => {console.log("err", e);setIsloading(false);})
    
     };
 
