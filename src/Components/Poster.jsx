@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect } from "react"
 import background from '../Assets/Poster_bg.svg'
 import image from '../Assets/Poster_img.svg'
 import msg from '../Assets/MessegeSymbol.svg'
@@ -23,6 +23,13 @@ const Poster = ({handlePay, btntext}) => {
 
       }
     };
+
+    useEffect(() => {
+        if(btntext){
+            setActiveStep(2)
+        }
+
+    },[btntext]);
   
     return(
         <section className="px-8 py-6 space-y-4 pt-20">
