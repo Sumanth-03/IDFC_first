@@ -38,7 +38,7 @@ function Home (){
         let data ={
           order_id: hdnRefNumber,
           razorpay_payment_id: transactionId,
-          razorpay_amount: amount,
+          razorpay_amount: "1",
           offer_id: "179",
         }
         makeApiCallWithAuth('checkPaymentStatus', data)
